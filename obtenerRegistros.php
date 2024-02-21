@@ -8,18 +8,18 @@
     $query = "SELECT * FROM usuarios ";
 
     if (isset($_POST["search"]["value"])){
-        $query .= 'WHERE nombre LIKE "%' . $_POST["search"]["value"] . '%" ';
-        $query .= 'OR apellidos LIKE "%' . $_POST["search"]["value"] . '%" ';
+            $query .= 'WHERE nombre LIKE "%' . $_POST["search"]["value"] . '%" ';
+            $query .= 'OR apellidos LIKE "%' . $_POST["search"]["value"] . '%" ';
         }
 
     if (isset($_POST["order"])){
-        $query .= 'ORDER BY' . $_POST['order']['0']['column'] .' '. $_POST['order'][0]['dir'] . ' ';
+            $query .= 'ORDER BY' . $_POST['order']['0']['column'] .' '. $_POST["order"][0]['dir'] . ' ';
         }else{
             $query .= 'ORDER BY id DESC ';
         }
 
     if ($_POST["length"] != -1){
-        $query .= 'LIMIT ' . $_POST["start"] . ',' . $_POST["length"];
+            $query .= 'LIMIT ' . $_POST["start"] . ',' . $_POST["length"];
     }
 
     $stmt = $conexion->prepare($query);
@@ -28,7 +28,7 @@
     $datos = array();
     $filtered_rows = $stmt->rowCount();
     foreach($resultado as $fila){
-        $imagen = '';
+            $imagen = '';
         if($fila["imagen"] != ''){
             $imagen = '<img src="img/' . $fila["imagen"] . '" class ="img-thumbnail" width="50" height="50"';
         }else{

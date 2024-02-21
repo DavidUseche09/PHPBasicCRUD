@@ -24,6 +24,6 @@
         include('conexion.php');
         $stmt = $conexion->prepare("SELECT * FROM usuarios");
         $stmt->execute();
-        $stmt->fetchAll();
+        $resultado = $stmt->fetchAll();
         return $stmt->rowCount();
     }
