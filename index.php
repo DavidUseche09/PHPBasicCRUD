@@ -158,6 +158,33 @@
           alert("Algunos campos son obligatorios");
         }
       });
+
+        // Funcion editar
+        $(document).on('click', 'editar', function(){
+          var id_usuario = $(this).attr("id");
+          $.ajax({
+            url:"obtener_registro.php",
+            method: "POST",
+            data:{id_usuario:id_usuario},
+            dataType:"json",
+            success:function(data){
+              $('#modalUsuario').modal('show');
+              $('#nombre').val(data.nombre);
+              $('#apellidos').val(data.apelli);
+              $('#telefono').val(data.telefono);
+              $('#email').val(data.email);
+              $('.modal-tittle').text("Editar Usuario");
+              $('#id_usuario').val(id_usuario);
+              $('#imagen_subida').html(data.imagen_usuario);
+              $('#action').val("Editar");
+              $('#operacion').val("Editar");
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+              console.log(textStatus, errorThrown);
+            }
+          })
+        })
+
       });      
     </script>
     
