@@ -99,6 +99,14 @@
   
   <script type="text/javascript">
       $(document).ready(function(){
+        $("#botonCrear").click(function(){
+          $("#formulario")[0].reset();
+          $(".modal-tittle").text("Crear Usuario");
+          $("#action").val("Crear");
+          $("#operacion").val("Crear");
+          $("#imagen_subida").html("");
+        })
+
         var dataTable = $('#datos_usuario').DataTable({
           "processing":true,
           "serverside":true,
@@ -114,7 +122,43 @@
             },
           ]
         });
+        
+        // Codigo de Insercion
+        $(document).on('submit', '#formulario', function(event){
+        event.preventDefault();
+        var nombres = $("#nombre").val();
+        var apellidos = $("#apellido").val()
+        var telefono = $("#telefono").val()
+        var email = $("#email").val()
+        var extension = $("#imagen_usuario").val().split('.').pop().toLowerCase();
+      
+        if(extension != ''){
+            if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1){
+            alert("Formato de imagen no es valido");
+            $("#imagen_usuario").val('');
+            return false;
+          }
+        }
+
+        if(nombres != '' && apellidos != '' && email != ''){
+          $.ajax({
+            url:"crear.php",
+            method: "POST", 
+            data:new FormData(this),
+            contentType: false,
+            processData: false,
+            success:function(data){
+              alert(data),
+              $('#formulario')[0].reset();
+              $('#modalUsuario').modal.hide();
+              dataTable.ajax.reload(); 
+            }
+          });
+        }else{
+          alert("Algunos campos son obligatorios");
+        }
       });
+      });      
     </script>
     
 </body>

@@ -30,7 +30,7 @@
     foreach($resultado as $fila){
             $imagen = '';
         if($fila["imagen"] != ''){
-            $imagen = '<img src="img/' . $fila["imagen"] . '" class ="img-thumbnail" width="50" height="50"';
+            $imagen = '<img src="img/' . $fila["imagen"] . '" class ="img-thumbnail" width="50" height="35" />';
         }else{
             $imagen = '';
         }
@@ -45,7 +45,7 @@
         $sub_array[] = $fila["fecha_creacion"];
         $sub_array[] = '<button type="button" name="editar" id="'.$fila["id"].'" class= btn btn-warning btn-xs editar">Editar</button>'; 
         $sub_array[] = '<button type="button" name="borrar" id="'.$fila["id"].'" class= btn btn-warning btn-xs borrar">Borrar</button>'; 
-        $datos = $sub_array;
+        $datos[] = $sub_array;
     }
 
     $salida = array(
