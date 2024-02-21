@@ -185,6 +185,27 @@
           })
         })
 
+        // Funcionalidad de borrar
+        $(document).on('click', '.borrar', function(){
+          var id_usuario = $(this).attr("id");
+          if(confirm("Esta seguro de borrar este registro? " + id_usuario)){
+            $.ajax({
+              url:"borrar.php",
+              method:"POST",
+              data:{id_usuario:id_usuario},
+              success:function(data)
+              {
+                alert(data)
+                dataTable.ajax.reload();
+              }
+            });
+          }
+          else
+          {
+            return false;
+          }
+        });
+
       });      
     </script>
     
